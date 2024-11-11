@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as pdfjsLib from 'pdfjs-dist/build/pdf';
 import 'pdfjs-dist/build/pdf.worker.entry';
-import '../App.css'
+import '../App.css';
+
 const PDFViewer = ({ pageNum, scale, url, setTotalPages }) => {
   const canvasRef = useRef(null);
   const [pdfDoc, setPdfDoc] = useState(null);
@@ -9,13 +10,16 @@ const PDFViewer = ({ pageNum, scale, url, setTotalPages }) => {
   const [pageNumPending, setPageNumPending] = useState(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [drawings, setDrawings] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const loadPdf = async () => {
+      setLoading(true);
       const loadingTask = pdfjsLib.getDocument(url);
       const pdf = await loadingTask.promise;
       setPdfDoc(pdf);
       setTotalPages(pdf.numPages); // Set the total pages
+      setLoading(false);
       renderPage(pageNum);
     };
 
@@ -26,9 +30,11 @@ const PDFViewer = ({ pageNum, scale, url, setTotalPages }) => {
     if (pdfDoc) {
       renderPage(pageNum);
     }
-  }, [pageNum]);
+  }, [pageNum, pdfDoc]);
 
   const renderPage = async (num) => {
+    if (!pdfDoc) return; // Ensure pdfDoc is not null
+
     setPageRendering(true);
     const page = await pdfDoc.getPage(num);
     const viewport = page.getViewport({ scale });
@@ -87,13 +93,17 @@ const PDFViewer = ({ pageNum, scale, url, setTotalPages }) => {
 
   return (
     <div className="pdf-container">
-      <canvas
-        ref={canvasRef}
-        id="the-canvas"
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-      ></canvas>
+      {loading ? (
+        <div>Loading PDF...</div>
+      ) : (
+        <canvas
+          ref={canvasRef}
+          id="the-canvas"
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+        ></canvas>
+      )}
     </div>
   );
 };
