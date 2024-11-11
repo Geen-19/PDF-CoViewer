@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const app = express();
 app.use(cors({
-  origin: 'https://stellular-palmier-aa5952.netlify.app/', // Replace with your client's origin
+  origin: 'https://stellular-palmier-aa5952.netlify.app', // Replace with your Netlify frontend URL
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
 }));
@@ -14,7 +14,7 @@ app.use(cors({
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'https://stellular-palmier-aa5952.netlify.app/', // Replace with your client's origin
+    origin: 'https://stellular-palmier-aa5952.netlify.app', // Replace with your Netlify frontend URL
     methods: ['GET', 'POST'],
   },
 });
@@ -22,9 +22,12 @@ console.log('io', io);
 
 let currentPage = 1;
 let raisedHands = new Set();
+let activeUsers = 0;
 
 io.on('connection', (socket) => {
   console.log('A user connected');
+  activeUsers++;
+  io.emit('activeUsersChanged', activeUsers);
 
   // Generate a unique ID for the user
   const userId = uuidv4();
@@ -53,9 +56,12 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     console.log('User disconnected');
+    activeUsers--;
+    io.emit('activeUsersChanged', activeUsers);
   });
 });
 
-server.listen(3000, () => {
-  console.log('Listening on *:3000');
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`Listening on *:${PORT}`);
 });
