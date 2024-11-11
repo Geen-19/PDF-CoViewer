@@ -80,5 +80,10 @@ Check out the live demo:
     - User Connection: Triggers when a user connects, assigns a unique ID, and sends the current page and raised hands.
     - Page Change: Admin users can emit a changePage event with the new page number.
     - Hand Raise Toggle: Viewer users can toggle their raised hand status with the toggleHandRaise event.
-    
+
 ## License
+
+### Additional Notes:
+
+- Update the `README.md` file with any specific details, like repository URLs.
+- Ensure proper setup and testing of the application on live servers before providing a live demo link.
