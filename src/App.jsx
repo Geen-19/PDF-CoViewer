@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Users, Crown, Hand, MessageCircle } from 'lucide-react';
 import io from 'socket.io-client';
-import { Worker, Viewer } from '@react-pdf-viewer/core';
-import '@react-pdf-viewer/core/lib/styles/index.css';
-import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
-import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+import PDFViewer from './components/PDFViewer';
 
 const UserRole = {
   ADMIN: 'ADMIN',
@@ -15,25 +12,38 @@ const socket = io('http://localhost:3000');
 
 const PDFCoViewer = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
+  const [totalPages, setTotalPages] = useState(0); // Initialize with 0
   const [userRole, setUserRole] = useState(UserRole.VIEWER);
   const [activeUsers] = useState(5);
   const [raisedHands, setRaisedHands] = useState(new Set());
   const [handRaised, setHandRaised] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [pdfFile, setPdfFile] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   const isAdmin = userRole === UserRole.ADMIN;
 
-  const defaultLayoutPluginInstance = defaultLayoutPlugin();
-
   useEffect(() => {
+    socket.on('connect', () => {
+      // Set the unique user ID received from the server
+      socket.on('userId', (id) => {
+        setUserId(id);
+      });
+    });
+
     socket.on('pageChanged', (page) => {
       setCurrentPage(page);
     });
 
+    socket.on('raisedHandsChanged', (hands) => {
+      setRaisedHands(new Set(hands));
+    });
+
     return () => {
+      socket.off('connect');
+      socket.off('userId');
       socket.off('pageChanged');
+      socket.off('raisedHandsChanged');
     };
   }, []);
 
@@ -54,15 +64,7 @@ const PDFCoViewer = () => {
   const toggleHandRaise = () => {
     if (isAdmin) return;
     setHandRaised(current => !current);
-    setRaisedHands(current => {
-      const newHands = new Set(current);
-      if (handRaised) {
-        newHands.delete('current-user');
-      } else {
-        newHands.add('current-user');
-      }
-      return newHands;
-    });
+    socket.emit('toggleHandRaise', userId); // Use the unique user ID
   };
 
   const addNotification = (message) => {
@@ -70,13 +72,6 @@ const PDFCoViewer = () => {
     setTimeout(() => {
       setNotifications(current => current.slice(1));
     }, 3000);
-  };
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setPdfFile(URL.createObjectURL(file));
-    }
   };
 
   return (
@@ -120,11 +115,12 @@ const PDFCoViewer = () => {
 
       <div className="flex-grow flex flex-col items-center justify-center p-4">
         <div className="bg-white rounded-lg shadow-lg p-4 w-full max-w-4xl">
-          <div className="aspect-video bg-gray-200 rounded-lg mb-4">
-            <div className="w-full h-full flex items-center justify-center">
-              <span className="text-gray-500">Page {currentPage}</span>
-            </div>
-          </div>
+          <PDFViewer 
+            pageNum={currentPage} 
+            scale={0.8} 
+            url="https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf" 
+            setTotalPages={setTotalPages} // Pass the setTotalPages function
+          /> 
 
           <div className="flex items-center justify-between px-4">
             <div className="flex items-center space-x-4">
@@ -177,29 +173,6 @@ const PDFCoViewer = () => {
               </div>
             )}
           </div>
-
-          {isAdmin && (
-            <div className="mt-4">
-              <input type="file" accept="application/pdf" onChange={handleFileChange} />
-            </div>
-          )}
-
-          {pdfFile && (
-            <div className="mt-4">
-              <Worker workerUrl={`https://unpkg.com/pdfjs-dist@${pdfjsVersion}/build/pdf.worker.min.js`}>
-                <Viewer
-                  fileUrl={pdfFile}
-                  plugins={[defaultLayoutPluginInstance]}
-                  onDocumentLoadSuccess={({ numPages }) => setTotalPages(numPages)}
-                  onPageChange={({ currentPage }) => {
-                    if (!isAdmin) {
-                      setCurrentPage(currentPage);
-                    }
-                  }}
-                />
-              </Worker>
-            </div>
-          )}
         </div>
       </div>
 
