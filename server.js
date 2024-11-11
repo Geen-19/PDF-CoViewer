@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const app = express();
 app.use(cors({
-  origin: 'http://localhost:5173', // Replace with your client's origin
+  origin: 'https://stellular-palmier-aa5952.netlify.app/', // Replace with your client's origin
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
 }));
@@ -14,7 +14,7 @@ app.use(cors({
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:5173', // Replace with your client's origin
+    origin: 'https://stellular-palmier-aa5952.netlify.app/', // Replace with your client's origin
     methods: ['GET', 'POST'],
   },
 });
