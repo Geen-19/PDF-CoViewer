@@ -106,7 +106,7 @@ Open your preferred web browser
 Open the application URL in multiple tabs (e.g., https://pdf-co-viewer.vercel.app)
 Each tab will represent a different user session
 
-Role Management
+## Role Management
 Admin Setup (First Tab)
 
 Open the first tab
@@ -118,7 +118,7 @@ You'll see a count of raised hands
 
 
 
-Viewer Setup (Additional Tabs)
+## Viewer Setup (Additional Tabs)
 
 Open additional tabs
 Leave these tabs in "Viewer Mode"
@@ -132,31 +132,23 @@ Hand raise button will be available
 Features & Interactions
 As an Admin
 
-Page Navigation
+## Page Navigation
 
 Use the left/right arrows to navigate through the PDF
 Current page number is displayed in the center
 All viewer tabs will automatically follow your navigation
 
 
-Monitor Participation
+## As a Viewer
 
-View the total number of active viewers
-See how many viewers have raised their hands
-Watch for real-time updates as viewers join/leave
-
-
-
-As a Viewer
-
-Following the Presentation
+## Following the Presentation
 
 The PDF will automatically sync with the admin's navigation
 A "Following presenter's screen" message appears at the bottom
 Current page number is displayed in the center
 
 
-Interaction
+## Interaction
 
 Click the hand icon to raise/lower your hand
 Hand icon turns yellow when raised
@@ -164,15 +156,15 @@ Admin will see the updated count of raised hands
 
 
 
-Testing Scenarios
-Scenario 1: Basic Navigation
+## Testing Scenarios
+### Scenario 1: Basic Navigation
 
 Open two tabs
 Set first tab to Admin Mode
 Navigate through pages in the admin tab
 Verify that the viewer tab follows automatically
 
-Scenario 2: Hand Raising
+### Scenario 2: Hand Raising
 
 Open three or more tabs
 Set one tab to Admin Mode
@@ -180,14 +172,14 @@ In viewer tabs, click the hand icon
 Verify that the admin sees the correct count of raised hands
 Lower hands and verify the count decreases
 
-Scenario 3: User Connection
+### Scenario 3: User Connection
 
 Start with 2-3 open tabs
 Open new tabs or close existing ones
 Verify that the viewer count updates correctly
 Verify that raised hand counts remain accurate
 
-Troubleshooting
+## Troubleshooting
 If synchronization issues occur:
 
 Refresh all tabs to re-establish connections
@@ -196,14 +188,14 @@ Verify that you have only one admin tab open
 
 Best Practices
 
-For Admins
+## For Admins
 
 Begin each session by verifying you're in Admin Mode
 Monitor the raised hands count regularly
 Navigate pages at a reasonable pace
 
 
-For Viewers
+## For Viewers
 
 Use hand raising judiciously
 Keep the tab active to maintain connection
@@ -211,7 +203,7 @@ Refresh the page if synchronization seems off
 
 
 
-Technical Notes
+## Technical Notes
 
 Each user gets a unique ID on connection
 Hand raise states persist across page navigation
