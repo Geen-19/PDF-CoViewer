@@ -2,6 +2,7 @@
 
 PDF Co-Viewer is a real-time collaborative platform that allows multiple users to view and interact with a PDF document simultaneously. Users can raise their hands, switch between viewer and admin roles, and follow the admin’s screen as pages change. This project is built with **React** for the frontend and **Node.js** with **Socket.IO** for the backend, enabling seamless real-time updates.
 
+### Video Link Of Working -> https://www.loom.com/share/7ba102804cc84096886d46dca95fd165?sid=43c7809a-4a96-4dc9-a226-c9e60e4058df 
 ## Table of Contents
 
 - [Demo](#demo)
@@ -16,7 +17,7 @@ PDF Co-Viewer is a real-time collaborative platform that allows multiple users t
 ---
 ## Deployment 
 - FrontEnd Deployment - https://pdf-co-viewer.vercel.app/
-- BackEnd Deployment - https://pdf-co-viewer.vercel.app/
+- BackEnd Deployment - https://pdf-coviewer-1.onrender.com/
 
 ## Demo
 
@@ -75,7 +76,7 @@ Check out the live demo:
     2. Viewer Mode: Users can view the page the admin is currently on, raise hands, and receive notifications.
     3. Hand Raise: Viewers can raise hands, which will be visible to the admin.
 
-    Video Link Of Working -> https://www.loom.com/share/7ba102804cc84096886d46dca95fd165?sid=43c7809a-4a96-4dc9-a226-c9e60e4058df 
+    
 ## Available Commands
     - Page Navigation: Admin can move between pages with navigation buttons.
     - Hand Raise: Viewers can raise or lower their hand by clicking the hand icon.
