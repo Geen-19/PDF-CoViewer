@@ -8,7 +8,7 @@ const UserRole = {
   VIEWER: 'VIEWER'
 };
 
-const socket = io('https://pdf-coviewer-1.onrender.com');
+const socket = io('localhost:3000');
 
 const PDFCoViewer = () => {
   const [currentPage, setCurrentPage] = useState(1);
