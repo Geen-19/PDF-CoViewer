@@ -3,6 +3,7 @@
 PDF Co-Viewer is a real-time collaborative platform that allows multiple users to view and interact with a PDF document simultaneously. Users can raise their hands, switch between viewer and admin roles, and follow the admin’s screen as pages change. This project is built with **React** for the frontend and **Node.js** with **Socket.IO** for the backend, enabling seamless real-time updates.
 
 ### Video Link Of Working -> https://www.loom.com/share/7ba102804cc84096886d46dca95fd165?sid=43c7809a-4a96-4dc9-a226-c9e60e4058df 
+### To Show Active Users Functionality and how raisedHands work in realTime -> https://www.loom.com/share/dadb2936e8944c6a9ce31bb378703ee8
 ## Table of Contents
 Working Screen Shot
 ![image](https://github.com/user-attachments/assets/fc69d53f-3af7-412f-aded-84c9f1568b8a)
