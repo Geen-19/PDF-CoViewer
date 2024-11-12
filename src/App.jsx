@@ -38,12 +38,16 @@ const PDFCoViewer = () => {
     socket.on('raisedHandsChanged', (hands) => {
       setRaisedHands(new Set(hands));
     });
+    socket.on('activeUsersChanged', (count) => {
+      setActiveUsers(count);
+    });
 
     return () => {
       socket.off('connect');
       socket.off('userId');
       socket.off('pageChanged');
       socket.off('raisedHandsChanged');
+      socket.off('activeUsersChanged');
     };
   }, []);
 
