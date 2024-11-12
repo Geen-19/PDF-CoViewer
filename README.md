@@ -4,9 +4,11 @@ PDF Co-Viewer is a real-time collaborative platform that allows multiple users t
 
 ### Video Link Of Working -> https://www.loom.com/share/7ba102804cc84096886d46dca95fd165?sid=43c7809a-4a96-4dc9-a226-c9e60e4058df 
 ### To Show Active Users Functionality and how raisedHands work in realTime -> https://www.loom.com/share/9ac0b38b610942a1afad584f3026795d
+
+### Working of 3 users and 1 admin with 3 user's hand risen up!
+![image](https://github.com/user-attachments/assets/a8741407-42b2-4026-806b-e04f54a5259c)
+
 ## Table of Contents
-Working Screen Shot
-![image](https://github.com/user-attachments/assets/fc69d53f-3af7-412f-aded-84c9f1568b8a)
 
 - [Demo](#demo)
 - [Features](#features)
