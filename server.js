@@ -57,6 +57,8 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('User disconnected');
     activeUsers--;
+    raisedHands.delete(userId);
+    io.emit('raisedHandsChanged', Array.from(raisedHands));
     io.emit('activeUsersChanged', activeUsers);
   });
 });
