@@ -14,7 +14,7 @@ const PDFCoViewer = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0); // Initialize with 0
   const [userRole, setUserRole] = useState(UserRole.VIEWER);
-  const [activeUsers] = useState(5);
+  const [activeUsers] = useState(0);
   const [raisedHands, setRaisedHands] = useState(new Set());
   const [handRaised, setHandRaised] = useState(false);
   const [notifications, setNotifications] = useState([]);

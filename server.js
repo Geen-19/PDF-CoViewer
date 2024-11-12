@@ -14,7 +14,7 @@ app.use(cors({
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'https://pdf-co-viewer.vercel.app', // Replace with your Netlify frontend URL
+    origin: 'https://pdf-co-viewer.vercel.app' , // Replace with your Netlify frontend URL
     methods: ['GET', 'POST'],
   },
 });
